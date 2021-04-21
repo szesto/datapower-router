@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <route uri="/hello">
+        <destination>http://localhost:8181</destination>
+        <tls-client-profile>tls1</tls-client-profile>
+    </route>
+    <route uri="/hello/world">
+        <destination>http://localhost:8181</destination>
+        <tls-client-profile>tls1</tls-client-profile>
+    </route>
+    <route uri="/goodbye">
+        <destination>http://localhost:8282</destination>
+        <tls-client-profile>default</tls-client-profile>
+    </route>
+</routes>
