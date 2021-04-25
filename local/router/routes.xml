@@ -5,11 +5,11 @@
         <tls-client-profile>tls1</tls-client-profile>
     </route>
     <route uri="/hello/world">
-        <destination>http://localhost:8181</destination>
+        <destination>http://localhost:8282</destination>
         <tls-client-profile>tls1</tls-client-profile>
     </route>
-    <route uri="/goodbye">
-        <destination>http://localhost:8282</destination>
+    <route uri="/nocon">
+        <destination>http://localhost:8182</destination>
         <tls-client-profile>default</tls-client-profile>
     </route>
 </routes>

@@ -19,10 +19,6 @@
     <xsl:variable name="error-protocol-response" select="dp:variable('var://service/error-protocol-response')"/>
     <xsl:variable name="error-protocol-reason-phrase" select="dp:variable('var://service/error-protocol-reason-phrase')"/>        
 
-    <!-- token expired -->
-    <!-- datapower failure -->
-    <!-- backend authentication failure -->
-
     <xsl:template match="/">
         <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
             <env:Body>
@@ -30,9 +26,12 @@
                     <faultcode>env:Client</faultcode>
                     <xsl:choose>
                         <!-- 
+                            error code 0x00d30003 is returned from session.reject()
                             url do not match any of existing services
+                            backend authentication failure
+                            token expired
                         -->
-                        <xsl:when test="$error-code = '0x00d30003'">
+                        <xsl:when test="$error-code = '0x00d30003' and contains($error-message, 'Route not found')">
                             <faultstring><xsl:value-of select="$th"/>, error-code = <xsl:value-of select="$error-code"/>, error-message = <xsl:value-of select="$error-message"/></faultstring>
                         </xsl:when>
                         <!-- 
@@ -46,6 +45,7 @@
                         </xsl:when>
                         <!-- 
                             default error message
+                            datapower failure
                         -->
                         <xsl:otherwise>
                             <faultstring>
